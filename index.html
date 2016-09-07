@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="assets/js/Engine.js"></script>
+    <script src="assets/js/PathBuilder.js"></script>
+    <title>Title</title>
+    <style>
+        .matrix td {
+            width: 100px;
+            height: 100px;
+            background: wheat;
+            font-size: 23px;
+            text-align: center;
+        }
+        .matrix td.pass {
+            background: green;
+        }
+        .matrix td.error {
+            background: red;
+        }
+        .matrix td.brown {
+            background: brown;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="application"></div>
+    <script>
+        Engine.defaultPath = 'assets/';
+        Engine.define('application', ['PathBuilder', 'Dom', 'Dispatcher'], (function(){
+            Engine.pathBuilder = Engine.require("PathBuilder");
+            var Dom = Engine.require("Dom");
+            var Dispatcher = Engine.require("Dispatcher");
+            var dispatcher = new Dispatcher('application');
+            dispatcher.placeApplication("Path")
+        }))
+    </script>
+</body>
+</html>
