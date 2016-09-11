@@ -14,7 +14,7 @@ Engine.define("SquareMatrix", ['Dom', 'MatrixApp'], function(){
         var limit = this.difficulty;
         var l = 1000;
         while(limit > 0) {
-            var point = Math.ceil(Math.random() * max) - 1;
+            var point = Math.floor(Math.random() * max);
             if(matrix.indexOf(point) === -1) {
                 matrix.push(point);
                 limit--;
@@ -36,6 +36,7 @@ Engine.define("SquareMatrix", ['Dom', 'MatrixApp'], function(){
         return out;
     };
     SquareMatrix.prototype.render = function() {
+        this.stopProgressBar();
         this.gameStart = false;
         this.content.innerHTML = '';
         this.matrix = this.createMatrix();
@@ -44,6 +45,7 @@ Engine.define("SquareMatrix", ['Dom', 'MatrixApp'], function(){
         var me = this;
         setTimeout(function() {
             me.hideItems();
+            me.startProgressBar(1115000);
             me.gameStart = true;
         }, 3000)
     };

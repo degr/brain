@@ -6,6 +6,7 @@ Engine.define("PathBuilder", function(){
             case 'MatrixApp':
             case 'NumberMatrix':
             case 'SquareMatrix':
+            case 'RepeatMatrix':
             case 'Home':
                 path = 'applications/' + module + '.js';
                 break;

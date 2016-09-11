@@ -56,7 +56,8 @@ Engine.define('MainMenu', ['Dom', 'StringUtils', 'UrlResolver'], function(){
         MainMenu.addButton('Home');
         MainMenu.addButton('SquareMatrix');
         MainMenu.addButton('NumberMatrix');
-       
+        MainMenu.addButton('RepeatMatrix');
+
     };
 
     return MainMenu;

@@ -15,7 +15,7 @@ Engine.define("NumberMatrix", ['Dom', 'MatrixApp'], function(){
         var limit = this.difficulty;
         var l = 1000;
         while(limit > 0) {
-            var point = Math.ceil(Math.random() * max) - 1;
+            var point = Math.floor(Math.random() * max);
             if(matrix.indexOf(point) === -1) {
                 matrix.push(point);
                 limit--;
@@ -48,6 +48,7 @@ Engine.define("NumberMatrix", ['Dom', 'MatrixApp'], function(){
         return out;
     };
     NumberMatrix.prototype.render = function() {
+        this.stopProgressBar();
         this.gameStart = false;
         this.shownIndex = 0;
         this.matrix = this.createMatrix();
@@ -59,6 +60,7 @@ Engine.define("NumberMatrix", ['Dom', 'MatrixApp'], function(){
             Dom.append(me.content, table);
             if(me.shownIndex >= me.chain.length) {
                 me.gameStart = true;
+                me.startProgressBar(5000);
             } else {
                 me.shownIndex++;
                 setTimeout(
@@ -76,7 +78,9 @@ Engine.define("NumberMatrix", ['Dom', 'MatrixApp'], function(){
         var me = this;
         cell.onclick = function() {
             if(me.gameStart) {
-                console.log(data);
+                if(me.matrix[h][w] === -1) {
+                    return;
+                }
                 cell.className = data ? 'pass' : 'error';
                 me.stack.push(data);
                 if (data === 0 || data != me.stack.length) {

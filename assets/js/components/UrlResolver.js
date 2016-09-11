@@ -11,6 +11,8 @@ Engine.define('UrlResolver', {
                 return 'SquareMatrix';
             case 'number-matrix':
                 return 'NumberMatrix';
+            case 'repeat-matrix':
+                return 'RepeatMatrix';
             default:
                 return '404';
         }
