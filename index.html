@@ -2,28 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>
+        if (typeof Promise === 'undefined') {
+            document.write(atob("PHNjcmlwdCBzcmM9ImpzL3BvbHlmaWxsL1Byb21pc2UuanMiPjwvc2NyaXB0Pg=="));
+        }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
     <script src="assets/js/Engine.js"></script>
     <script src="assets/js/PathBuilder.js"></script>
     <title>Title</title>
-    <style>
-        .matrix td {
-            width: 100px;
-            height: 100px;
-            background: wheat;
-            font-size: 23px;
-            text-align: center;
-        }
-        .matrix td.pass {
-            background: green;
-        }
-        .matrix td.error {
-            background: red;
-        }
-        .matrix td.brown {
-            background: brown;
-        }
-
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
     <div id="application"></div>
@@ -34,7 +23,7 @@
             var Dom = Engine.require("Dom");
             var Dispatcher = Engine.require("Dispatcher");
             var dispatcher = new Dispatcher('application');
-            dispatcher.placeApplication("Path")
+            dispatcher.placeApplication("Home")
         }))
     </script>
 </body>

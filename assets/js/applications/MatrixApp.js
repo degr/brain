@@ -1,7 +1,11 @@
-Engine.define("MatrixApp", ['Dom'], function(){
+Engine.define("MatrixApp", ['Dom', 'MainMenu'], function(){
     var Dom = Engine.require('Dom');
-    var MatrixApp = function() {
-        this.container = Dom.el('div');
+    var MainMenu = Engine.require('MainMenu');
+    
+    var MatrixApp = function(context, placeApplication) {
+        var mainMenu = new MainMenu(context, placeApplication);
+        this.content = Dom.el('div');
+        this.container = Dom.el('div', null, [mainMenu.container, this.content]);
         this.width = 3;
         this.height = 3;
         this.difficulty = 3;

@@ -1,13 +1,14 @@
-Engine.define("Square", ['Dom', 'MatrixApp'], function(){
+Engine.define("SquareMatrix", ['Dom', 'MatrixApp'], function(){
     var Dom = Engine.require('Dom');
     var MatrixApp = Engine.require('MatrixApp');
-    var Square = function() {
+    var SquareMatrix = function() {
         MatrixApp.apply(this, arguments);
     };
 
-    Square.prototype = Object.create(MatrixApp.prototype);
+    SquareMatrix.prototype = Object.create(MatrixApp.prototype);
+    SquareMatrix.URL = 'square-matrix';
     
-    Square.prototype.createMatrix = function() {
+    SquareMatrix.prototype.createMatrix = function() {
         var max = this.width * this.height;
         var matrix = [];
         var limit = this.difficulty;
@@ -34,12 +35,12 @@ Engine.define("Square", ['Dom', 'MatrixApp'], function(){
         }
         return out;
     };
-    Square.prototype.render = function() {
+    SquareMatrix.prototype.render = function() {
         this.gameStart = false;
-        this.container.innerHTML = '';
+        this.content.innerHTML = '';
         this.matrix = this.createMatrix();
         var table = this.buildTable();
-        Dom.append(this.container, table);
+        Dom.append(this.content, table);
         var me = this;
         setTimeout(function() {
             me.hideItems();
@@ -48,7 +49,7 @@ Engine.define("Square", ['Dom', 'MatrixApp'], function(){
     };
     
     
-    Square.prototype.buildCell = function(h, w) {
+    SquareMatrix.prototype.buildCell = function(h, w) {
         var data = this.matrix[h][w];
         var cell = Dom.el('td');
         var me = this;
@@ -74,5 +75,5 @@ Engine.define("Square", ['Dom', 'MatrixApp'], function(){
         return cell;
     };
         
-    return Square;
+    return SquareMatrix;
 });

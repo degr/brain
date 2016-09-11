@@ -1,15 +1,15 @@
-Engine.define("Path", ['Dom', 'MatrixApp'], function(){
+Engine.define("NumberMatrix", ['Dom', 'MatrixApp'], function(){
     var Dom = Engine.require('Dom');
     var MatrixApp = Engine.require('MatrixApp');
-    var Path = function() {
+    var NumberMatrix = function() {
         MatrixApp.apply(this, arguments);
         this.chain = [];
         this.stack = [];
         this.shownIndex = null;
     };
-    Path.prototype = Object.create(MatrixApp.prototype);
-
-    Path.prototype.createMatrix = function() {
+    NumberMatrix.prototype = Object.create(MatrixApp.prototype);
+    NumberMatrix.URL = 'number-matrix';
+    NumberMatrix.prototype.createMatrix = function() {
         var max = this.width * this.height;
         var matrix = [];
         var limit = this.difficulty;
@@ -27,13 +27,19 @@ Engine.define("Path", ['Dom', 'MatrixApp'], function(){
         }
         var out = [];
         this.chain = [];
-        var value = 1;
+        var values = [];
+        for(var i = 0; i < this.difficulty; i++) {
+            values.push(i+1);
+        }
         for(var h = 0; h < this.height; h++) {
             var line = [];
             for(var w = 0; w < this.width; w++) {
                 var index = h * this.width + w;
-                line.push(matrix.indexOf(index) > -1 ? value++ : 0);
-                if(matrix.indexOf(index) > -1) {
+                var isValueSet = matrix.indexOf(index) > -1;
+                var valuesIndex = Math.floor(Math.random() * values.length);
+                var value = isValueSet ? values.splice(valuesIndex, 1)[0] : 0;
+                line.push(value);
+                if(isValueSet) {
                     this.chain.push(value);
                 }
             }
@@ -41,16 +47,16 @@ Engine.define("Path", ['Dom', 'MatrixApp'], function(){
         }
         return out;
     };
-    Path.prototype.render = function() {
+    NumberMatrix.prototype.render = function() {
         this.gameStart = false;
         this.shownIndex = 0;
         this.matrix = this.createMatrix();
         this.stack = [];
         var me = this;
         function showNext() {
-            me.container.innerHTML = '';
+            me.content.innerHTML = '';
             var table = me.buildTable();
-            Dom.append(me.container, table);
+            Dom.append(me.content, table);
             if(me.shownIndex >= me.chain.length) {
                 me.gameStart = true;
             } else {
@@ -64,7 +70,7 @@ Engine.define("Path", ['Dom', 'MatrixApp'], function(){
     };
 
 
-    Path.prototype.buildCell = function(h, w) {
+    NumberMatrix.prototype.buildCell = function(h, w) {
         var data = this.matrix[h][w];
         var cell = Dom.el('td', null, data === this.shownIndex + 1 ? data : null);
         var me = this;
@@ -93,7 +99,7 @@ Engine.define("Path", ['Dom', 'MatrixApp'], function(){
         return cell;
     };
 
-    Path.prototype.isMatrixEmpty = function () {
+    NumberMatrix.prototype.isMatrixEmpty = function () {
         for(var i = 0; i < this.matrix.length; i++) {
             var line = this.matrix[i];
             for(var w = 0; w < line.length; w++) {
@@ -104,5 +110,5 @@ Engine.define("Path", ['Dom', 'MatrixApp'], function(){
         }
         return true;
     };
-    return Path;
+    return NumberMatrix;
 });

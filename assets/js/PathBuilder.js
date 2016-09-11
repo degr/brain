@@ -4,9 +4,17 @@ Engine.define("PathBuilder", function(){
         var path;
         switch (module) {
             case 'MatrixApp':
-            case 'Square':
-            case 'Path':
+            case 'NumberMatrix':
+            case 'SquareMatrix':
+            case 'Home':
                 path = 'applications/' + module + '.js';
+                break;
+            case 'StringUtils':
+                path = 'utils/' + module + '.js';
+                break;
+            case 'UrlResolver':
+            case 'MainMenu':
+                path = 'components/' + module + '.js';
                 break;
             default:
                 path = '';
